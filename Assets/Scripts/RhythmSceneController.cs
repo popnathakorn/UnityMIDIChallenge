@@ -11,7 +11,7 @@ public class RhythmSceneController : MonoBehaviour
     void Start()
     {
         // Loading drum track from midi file
-        _midiTrackFileBuffer = File.ReadAllBytes($"{Application.dataPath}/Resources/{drumTrackFileName}.midi");
+        _midiTrackFileBuffer = File.ReadAllBytes($"{Application.dataPath}/Resources/{drumTrackFileName}.mid");
         
         // Below this please implement scene initialize
         // from MIDI track above to any kind of rhythm game play scene
