@@ -1,5 +1,6 @@
 # UnityMIDIChallenge
 This is the test of **Unity Developer** from **Mutex Team**. Test duration is **7 days** since this test has been received. It is a simple challenge for drawing a gameplay scene from a MIDI file using Unity engine(C#), please thoroughly read before the start.
+> Unity engine version 2020.3.14f1
 
 ## Requirements
 ### Gameplay
