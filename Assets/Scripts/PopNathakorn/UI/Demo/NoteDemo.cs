@@ -38,7 +38,8 @@ namespace PopNathakorn.UI.Demo
         private void LaunchColor1With4Seconds()
         {
             Debug.Log("Launch note color 1 using 4 second to reach the end");
-            note.Launch(color1, noteGenerator.position, noteDestroyer.position, 4F, (note)=>
+            note.Launch(color1, noteGenerator.position, noteDestroyer.position, 4F);
+            note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log("Note color 1 has been destroyed");
             });
@@ -47,16 +48,19 @@ namespace PopNathakorn.UI.Demo
         private void LaunchColor2With3Seconds()
         {
             Debug.Log("Launch note color 2 using 3 second to reach the end");
-            note.Launch(color2, noteGenerator.position, noteDestroyer.position, 3F, (note) =>
+            note.Launch(color2, noteGenerator.position, noteDestroyer.position, 3F);
+            note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log("Note color 2 has been destroyed");
+
             });
         }
 
         private void LaunchColor3With2Seconds()
         {
             Debug.Log("Launch note color 3 using 2 second to reach the end");
-            note.Launch(color3, noteGenerator.position, noteDestroyer.position, 2F, (note) =>
+            note.Launch(color3, noteGenerator.position, noteDestroyer.position, 2F);
+            note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log("Note color 3 has been destroyed");
             });

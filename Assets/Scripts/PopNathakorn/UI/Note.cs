@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace PopNathakorn.UI
 {
@@ -12,11 +12,12 @@ namespace PopNathakorn.UI
         private Image image;
         #endregion
 
+        public NoteEvent OnDestroyed = new NoteEvent();
+
         Vector3 start;
         Vector3 end;
         float startTime;
         float endTime;
-        Action<Note> onDestroyed;
         IEnumerator launchingRoutine;
 
         float time => Time.time;
@@ -28,7 +29,7 @@ namespace PopNathakorn.UI
         /// <param name="start">Start position</param>
         /// <param name="end">Destination position</param>
         /// <param name="timeToReach">How long to reach destination</param>
-        public void Launch(Color color, Vector3 start, Vector3 end, float timeToReach, Action<Note> onDestroyed = null)
+        public void Launch(Color color, Vector3 start, Vector3 end, float timeToReach)
         {
             if(launchingRoutine != null)
                 return;
@@ -36,7 +37,6 @@ namespace PopNathakorn.UI
             image.color = color;
             this.start = start;
             this.end = end;
-            this.onDestroyed = onDestroyed;
 
             image.rectTransform.position = start;
             startTime = time;
@@ -46,6 +46,9 @@ namespace PopNathakorn.UI
             StartCoroutine(launchingRoutine);
         }
 
+        /// <summary>
+        /// Visually destroy this note
+        /// </summary>
         public void Destroy()
         {
             if(launchingRoutine == null)
@@ -54,7 +57,9 @@ namespace PopNathakorn.UI
             StopCoroutine(launchingRoutine);
             image.rectTransform.position = end;
             launchingRoutine = null;
-            onDestroyed?.Invoke(this);
+
+            OnDestroyed?.Invoke(this);
+            OnDestroyed?.RemoveAllListeners();
         }
 
         IEnumerator Launching()
@@ -68,4 +73,6 @@ namespace PopNathakorn.UI
             Destroy();
         }
     }
+
+    public class NoteEvent : UnityEvent<Note> { }
 }
