@@ -69,5 +69,5 @@ This is the test of **Unity Developer** from **Mutex Team**. Test duration is **
 
 ## Submission
 Submit your test by creating PR to this repository
-<!-- replace your link here -->
-UML diagram: [link](https://github.com/bnkmutech/UnityMIDIChallenge)
+<!-- replace your link here --><!-- replace your link here -->
+UML diagram: [link](https://docs.google.com/document/d/1K37ROpNNiicsqDEXrBKGxZ8g6nqV07Zfvu-6-DlUTTQ/edit?usp=sharing)
