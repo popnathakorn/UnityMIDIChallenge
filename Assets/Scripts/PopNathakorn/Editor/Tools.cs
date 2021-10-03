@@ -62,5 +62,14 @@ namespace PopNathakorn.Editor
             }
             Debug.Log(message);
         }
+
+        [MenuItem("PopNathakorn/Tools/Test File Path")]
+        private static void TestFilePath()
+        {
+            string referencePath = "/AssetData/Midi/DrumTrack1.mid";
+
+            // Read a MIDI file
+            var midiFile = MidiFile.Read(Application.dataPath + referencePath);
+        }
     }
 }

@@ -79,10 +79,10 @@ namespace PopNathakorn.Game
         {
             while(true)
             {
-                ResetGame();
-
                 pressSpaceToStartText.enabled = true;
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+                ResetGame();
                 pressSpaceToStartText.enabled = false;
                 Debug.Log("[GameManager] Game Start!");
 
@@ -98,7 +98,7 @@ namespace PopNathakorn.Game
         private void Setup(LevelConfiguration levelConfiguration)
         {
             // Read a MIDI file
-            var midiFile = MidiFile.Read(levelConfiguration.Music.MidiFilePath);
+            var midiFile = MidiFile.Read(levelConfiguration.Music.MidiFileAbsolutePath);
             var midiTracks = midiFile.GetTrackChunks().ToList();
 
             TempoMap tempoMap = midiFile.GetTempoMap();

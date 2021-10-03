@@ -316,7 +316,7 @@ MonoBehaviour:
   noteLaneGroup: {fileID: 834872238}
   levelConfiguration:
     Music:
-      MidiFilePath: D:\github.com\popnathakorn\UnityMIDIChallenge\Assets\AssetData\Midi\DrumTrack1.mid
+      MidiFileRelativePath: /AssetData/Midi/DrumTrack1.mid
       AudioClip: {fileID: 8300000, guid: 5601d09dd8fe057438eaddc88c611702, type: 3}
       TimeOffet: 0.2
     NoteLanes:
@@ -326,36 +326,42 @@ MonoBehaviour:
       MidiValue: 37
       Color: {r: 0.6745098, g: 0.35686275, b: 0.89019614, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     - InputKey: 115
       Track: 0
       Channel: 0
       MidiValue: 49
       Color: {r: 0.42352945, g: 0.77647066, b: 0.882353, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     - InputKey: 100
       Track: 0
       Channel: 0
       MidiValue: 38
       Color: {r: 0.5372549, g: 0.87843144, b: 0.31764707, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     - InputKey: 102
       Track: 0
       Channel: 0
       MidiValue: 36
       Color: {r: 0.8745099, g: 0.86666673, b: 0.30980393, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     - InputKey: 103
       Track: 0
       Channel: 0
       MidiValue: 48
       Color: {r: 0.854902, g: 0.6156863, b: 0.32941177, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     - InputKey: 104
       Track: 0
       Channel: 0
       MidiValue: 43
       Color: {r: 0.8470589, g: 0.34901962, b: 0.34509805, a: 1}
       ScorePoint: 20
+      PrecisionCriteria: 0
     TimeToReachHitPosition: 3
 --- !u!4 &2037881223
 Transform:

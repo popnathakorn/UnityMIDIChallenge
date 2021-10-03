@@ -45,7 +45,7 @@ namespace PopNathakorn.UI.Demo
         private void Awake()
         {
             // Read a MIDI file
-            var midiFile = MidiFile.Read(levelConfiguration.Music.MidiFilePath);
+            var midiFile = MidiFile.Read(levelConfiguration.Music.MidiFileAbsolutePath);
             var midiTracks = midiFile.GetTrackChunks().ToList();
 
             TempoMap tempoMap = midiFile.GetTempoMap();

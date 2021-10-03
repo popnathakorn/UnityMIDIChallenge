@@ -7,9 +7,9 @@ namespace PopNathakorn.Game.Configuration
     public struct MusicConfiguration
     {
         /// <summary>
-        /// Absolute path for midi file
+        /// Relative path for midi file
         /// </summary>
-        public string MidiFilePath;
+        public string MidiFileRelativePath;
 
         /// <summary>
         /// Audio clip
@@ -20,5 +20,10 @@ namespace PopNathakorn.Game.Configuration
         /// How long of midi delay from music in seconds
         /// </summary>
         public float TimeOffet;
+
+        /// <summary>
+        /// Absolute path for midi file
+        /// </summary>
+        public string MidiFileAbsolutePath { get => Application.dataPath + MidiFileRelativePath; }
     }
 }
