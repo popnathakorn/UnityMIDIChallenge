@@ -17,7 +17,7 @@ namespace PopNathakorn.UI
         [SerializeField]
         private NoteGenerator noteGenerator;
         [SerializeField]
-        private Button keyButton;
+        private KeyVisualizer keyButton;
         [SerializeField]
         private Text keyButtonText;
         #endregion
@@ -58,6 +58,7 @@ namespace PopNathakorn.UI
             {
                 inputKey = value;
                 keyButtonText.text = inputKey.ToString();
+                keyButton.InputKey = inputKey;
                 name = $"NoteLane:{inputKey}";
             }
         }
