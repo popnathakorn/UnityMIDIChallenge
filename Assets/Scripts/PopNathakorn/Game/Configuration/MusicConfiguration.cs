@@ -19,7 +19,7 @@ namespace PopNathakorn.Game.Configuration
         /// <summary>
         /// How long of midi delay from music in seconds
         /// </summary>
-        public float TimeOffet;
+        public float TimeOffset;
 
         /// <summary>
         /// Absolute path for midi file

@@ -492,7 +492,7 @@ MonoBehaviour:
     Music:
       MidiFileRelativePath: /AssetData/Midi/DrumTrack1.mid
       AudioClip: {fileID: 8300000, guid: 5601d09dd8fe057438eaddc88c611702, type: 3}
-      TimeOffet: 0.2
+      TimeOffset: 0.2
     NoteLanes:
     - InputKey: 97
       Track: 0

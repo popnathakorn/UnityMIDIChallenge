@@ -88,7 +88,7 @@ namespace PopNathakorn.Game
 
                 bool isAllNoteRendered = false;
                 LaunchNotes(() => isAllNoteRendered = true);
-                yield return new WaitForSeconds(levelConfiguration.TimeToReachHitPosition - levelConfiguration.Music.TimeOffet);
+                yield return new WaitForSeconds(levelConfiguration.TimeToReachHitPosition - levelConfiguration.Music.TimeOffset);
                 PlayAudioClip();
                 yield return new WaitUntil(() => !audioSource.isPlaying && isAllNoteRendered);
                 Debug.Log("[GameManager] Game End!");
