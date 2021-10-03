@@ -40,6 +40,28 @@ namespace PopNathakorn.UI
 
         public UnityEvent OnCompleted = new UnityEvent();
 
+        public Color Color
+        {
+            set
+            {
+                color = value;
+                keyButton.targetGraphic.color = color;
+            }
+        }
+
+        public KeyCode InputKey
+        {
+            set
+            {
+                inputKeyCode = value;
+                keyButtonText.text = inputKeyCode.ToString();
+                name = $"NoteLane:{inputKeyCode}";
+            }
+        }
+
+        public NoteGenerator NoteGenerator { set { noteGenerator = value; } }
+        public NoteSequence NoteSequence { set { noteSequence = NoteSequence.OrderByTime(value); } }
+
         float time => Time.time;
 
         float startTime;
@@ -50,19 +72,28 @@ namespace PopNathakorn.UI
 
         private void Awake()
         {
+            UpdateVisual();
+        }
+
+        private void UpdateVisual()
+        {
             keyButton.targetGraphic.color = color;
             keyButtonText.text = inputKeyCode.ToString();
         }
 
         public void Launch(NoteSequence noteSequence)
         {
+            NoteSequence = noteSequence;
+            Launch();
+        }
+
+        public void Launch()
+        {
             if(launchingRoutine != null || noteSequence == null)
                 return;
 
-            this.noteSequence = NoteSequence.OrderByTime(noteSequence);
-            timeToReachEndPosition = CalculateTimeToReachEndPosition(noteSequence.TimeToReachHitPosition);
-
             startTime = time;
+            timeToReachEndPosition = CalculateTimeToReachEndPosition(noteSequence.TimeToReachHitPosition);
 
             launchingRoutine = Launching();
             StartCoroutine(launchingRoutine);
@@ -128,6 +159,9 @@ namespace PopNathakorn.UI
 
     public struct NoteData
     {
+        /// <summary>
+        /// Time in seconds
+        /// </summary>
         public float Time;
 
         public NoteData(float time)
