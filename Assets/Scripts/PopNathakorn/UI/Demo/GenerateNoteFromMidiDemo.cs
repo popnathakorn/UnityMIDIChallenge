@@ -84,10 +84,20 @@ namespace PopNathakorn.UI.Demo
             audioSource.PlayOneShot(levelConfiguration.Music.AudioClip);
         }
 
-        private void LaunchNotes()
+        private void LaunchNotes(Action onCompleted = null)
         {
+            int completedLane = 0;
+
             foreach(var lane in noteLanes)
+            {
                 lane.Launch();
+                lane.OnCompleted.AddListener(() =>
+                {
+                    completedLane++;
+                    if(completedLane == noteLanes.Count)
+                        onCompleted?.Invoke();
+                });
+            }
         }
 
         private void Play()
@@ -101,10 +111,11 @@ namespace PopNathakorn.UI.Demo
 
         IEnumerator PlayRoutine()
         {
-            LaunchNotes();
+            bool isAllNoteRendered = false;
+            LaunchNotes(() => isAllNoteRendered = true);
             yield return new WaitForSeconds(levelConfiguration.TimeToReachHitPosition - levelConfiguration.Music.TimeOffet);
             PlayAudioClip();
-
+            yield return new WaitUntil(() => !audioSource.isPlaying && isAllNoteRendered);
             playRoutine = null;
         }
     }
