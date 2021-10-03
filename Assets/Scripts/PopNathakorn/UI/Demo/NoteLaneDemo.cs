@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace PopNathakorn.UI.Demo
 {
@@ -10,6 +11,8 @@ namespace PopNathakorn.UI.Demo
         [SerializeField]
         private NoteLane noteLane2;
         #endregion
+
+        float time => Time.time;
 
         private void Update()
         {
@@ -45,11 +48,15 @@ namespace PopNathakorn.UI.Demo
             sequence.Enqueue(new NoteData(2.75F));
             sequence.Enqueue(new NoteData(3F));
 
-            noteLane1.Launch(sequence);
-            Debug.Log("LaunceSequenceOnLane1 start!");
             noteLane1.OnCompleted.AddListener(()=>
             {
-                Debug.Log("LaunceSequenceOnLane1 finish!");
+                Debug.Log($"LaunceSequenceOnLane1 finish!, time({time})");
+            });
+            noteLane1.Launch(sequence);
+            Debug.Log($"LaunceSequenceOnLane1 start!, time({time})");
+            DelayInvokeAction(timeToReachHitPosition, () =>
+            {
+                Debug.Log($"First Note on lane1 should reach hit position!, time({time})");
             });
         }
 
@@ -62,12 +69,28 @@ namespace PopNathakorn.UI.Demo
             sequence.Enqueue(new NoteData(2F));
             sequence.Enqueue(new NoteData(2.75F));
             sequence.Enqueue(new NoteData(3F));
-            noteLane2.Launch(sequence);
-            Debug.Log("LaunceSequenceOnLane2 start!");
+
             noteLane2.OnCompleted.AddListener(() =>
             {
-                Debug.Log("LaunceSequenceOnLane2 finish!");
+                Debug.Log($"LaunceSequenceOnLane2 finish!, time({time})");
             });
+            noteLane2.Launch(sequence);
+            Debug.Log($"LaunceSequenceOnLane2 start!, time({time})");
+            DelayInvokeAction(timeToReachHitPosition, () =>
+            {
+                Debug.Log($"First Note on lane2 should reach hit position!, time({time})");
+            });
+        }
+
+        private void DelayInvokeAction(float timeInSeconds, System.Action action)
+        {
+            StartCoroutine(DelayInvokeActionRoutine(timeInSeconds, action));
+        }
+
+        private IEnumerator DelayInvokeActionRoutine(float timeInSeconds, System.Action action)
+        {
+            yield return new WaitForSeconds(timeInSeconds);
+            action?.Invoke();
         }
     }
 }
