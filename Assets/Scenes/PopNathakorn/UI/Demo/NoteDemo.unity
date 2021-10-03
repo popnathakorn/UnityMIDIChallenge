@@ -663,9 +663,11 @@ MonoBehaviour:
   note: {fileID: 662403960}
   noteGenerator: {fileID: 1540924386}
   noteDestroyer: {fileID: 1213572960}
+  hitPosition: {fileID: 1653143383}
   color1: {r: 0.6784314, g: 0.36078432, b: 0.8941177, a: 1}
   color2: {r: 0.41960788, g: 0.7803922, b: 0.882353, a: 1}
   color3: {r: 0.5372549, g: 0.87843144, b: 0.32156864, a: 1}
+  inputKey: 97
 --- !u!4 &639017309
 Transform:
   m_ObjectHideFlags: 0
@@ -1131,6 +1133,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 817885022}
     m_Modifications:
+    - target: {fileID: 7266744027388770548, guid: 6db16af3d426bd64baa3b63ebed61d5d, type: 3}
+      propertyPath: inputKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266744027388770548, guid: 6db16af3d426bd64baa3b63ebed61d5d, type: 3}
+      propertyPath: hitPrecision
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266744027388770548, guid: 6db16af3d426bd64baa3b63ebed61d5d, type: 3}
+      propertyPath: precisionInSeconds
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7266744027388770552, guid: 6db16af3d426bd64baa3b63ebed61d5d, type: 3}
       propertyPath: m_Name
       value: Note

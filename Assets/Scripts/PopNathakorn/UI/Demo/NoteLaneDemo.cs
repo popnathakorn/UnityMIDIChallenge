@@ -6,10 +6,17 @@ namespace PopNathakorn.UI.Demo
     public class NoteLaneDemo : MonoBehaviour
     {
         #region UI Components
+        [Header("UI Components")]
         [SerializeField]
         private NoteLane noteLane1;
         [SerializeField]
         private NoteLane noteLane2;
+        #endregion
+
+        #region Settings
+        [Header("UI Settings")]
+        [SerializeField]
+        private float precisionCriteria;
         #endregion
 
         float time => Time.time;
@@ -48,6 +55,7 @@ namespace PopNathakorn.UI.Demo
             sequence.Enqueue(new NoteData(2.75F));
             sequence.Enqueue(new NoteData(3F));
 
+            noteLane1.PrecisionCriteria = precisionCriteria;
             noteLane1.OnCompleted.AddListener(()=>
             {
                 Debug.Log($"LaunceSequenceOnLane1 finish!, time({time})");
@@ -70,6 +78,7 @@ namespace PopNathakorn.UI.Demo
             sequence.Enqueue(new NoteData(2.75F));
             sequence.Enqueue(new NoteData(3F));
 
+            noteLane2.PrecisionCriteria = precisionCriteria;
             noteLane2.OnCompleted.AddListener(() =>
             {
                 Debug.Log($"LaunceSequenceOnLane2 finish!, time({time})");

@@ -5,21 +5,29 @@ namespace PopNathakorn.UI.Demo
     public class NoteDemo : MonoBehaviour
     {
         #region UI Components
+        [Header("UI Components")]
         [SerializeField]
         private Note note;
         [SerializeField]
         private RectTransform noteGenerator;
         [SerializeField]
         private RectTransform noteDestroyer;
+        [SerializeField]
+        private RectTransform hitPosition;
         #endregion
 
         #region Settings
+        [Header("UI Settings")]
         [SerializeField]
         private Color color1;
         [SerializeField]
         private Color color2;
         [SerializeField]
         private Color color3;
+        [SerializeField]
+        private KeyCode inputKey;
+        [SerializeField]
+        private float precisionCriteria;
         #endregion
 
         float time => Time.time;
@@ -39,8 +47,8 @@ namespace PopNathakorn.UI.Demo
         #region Demo
         private void LaunchColor1With4Seconds()
         {
-            Debug.Log($"Launch note color 1 using 4 second to reach the end, time({time})");
-            note.Launch(color1, noteGenerator.position, noteDestroyer.position, 4F);
+            Debug.Log($"Launch note color 1 using 4 second to reach hit position, time({time})");
+            note.Launch(color1, noteGenerator.position, noteDestroyer.position, hitPosition.position, 4F, precisionCriteria, inputKey);
             note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log($"Note color 1 has been destroyed, time({time})");
@@ -49,8 +57,8 @@ namespace PopNathakorn.UI.Demo
 
         private void LaunchColor2With3Seconds()
         {
-            Debug.Log($"Launch note color 2 using 3 second to reach the end, time({time})");
-            note.Launch(color2, noteGenerator.position, noteDestroyer.position, 3F);
+            Debug.Log($"Launch note color 2 using 3 second to reach hit position, time({time})");
+            note.Launch(color2, noteGenerator.position, noteDestroyer.position, hitPosition.position, 3F, precisionCriteria, inputKey);
             note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log($"Note color 2 has been destroyed, time({time})");
@@ -60,8 +68,8 @@ namespace PopNathakorn.UI.Demo
 
         private void LaunchColor3With2Seconds()
         {
-            Debug.Log($"Launch note color 3 using 2 second to reach the end, time({time})");
-            note.Launch(color3, noteGenerator.position, noteDestroyer.position, 2F);
+            Debug.Log($"Launch note color 3 using 2 second to reach hit position, time({time})");
+            note.Launch(color3, noteGenerator.position, noteDestroyer.position, hitPosition.position, 2F, precisionCriteria, inputKey);
             note.OnDestroyed.AddListener((note) =>
             {
                 Debug.Log($"Note color 3 has been destroyed, time({time})");

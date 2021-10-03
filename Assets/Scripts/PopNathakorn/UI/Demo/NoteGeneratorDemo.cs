@@ -10,11 +10,15 @@ namespace PopNathakorn.UI.Demo
         [SerializeField]
         private RectTransform lane1StartPosition;
         [SerializeField]
+        private RectTransform lane1HitPosition;
+        [SerializeField]
         private RectTransform lane1EndPosition;
         [SerializeField]
         private RectTransform lane1;
         [SerializeField]
         private RectTransform lane2StartPosition;
+        [SerializeField]
+        private RectTransform lane2HitPosition;
         [SerializeField]
         private RectTransform lane2EndPosition;
         [SerializeField]
@@ -39,12 +43,12 @@ namespace PopNathakorn.UI.Demo
         void LaunchNoteOnLane1()
         {
             var note = noteGenerator.Create(lane1);
-            note.Launch(color1, lane1StartPosition.position, lane1EndPosition.position, 4F);
+            note.Launch(color1, lane1StartPosition.position, lane1EndPosition.position, lane1HitPosition.position, 0, 4F);
         }
         void LaunchNoteOnLane2()
         {
             var note = noteGenerator.Create(lane2);
-            note.Launch(color2, lane2StartPosition.position, lane2EndPosition.position, 4F);
+            note.Launch(color2, lane2StartPosition.position, lane2EndPosition.position, lane2HitPosition.position, 0, 4F);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using PopNathakorn.Game.Configuration;
 
 namespace PopNathakorn.UI.Demo
 {
@@ -117,59 +118,7 @@ namespace PopNathakorn.UI.Demo
             PlayAudioClip();
             yield return new WaitUntil(() => !audioSource.isPlaying && isAllNoteRendered);
             playRoutine = null;
-        }
-    }
-
-    [Serializable]
-    public struct LevelConfiguration
-    {
-        public MusicConfiguration Music;
-        public List<NoteLaneConfiguration> NoteLanes;
-        public float TimeToReachHitPosition;
-    }
-
-    [Serializable]
-    public struct NoteLaneConfiguration
-    {
-        public KeyCode InputKey;
-        public byte Track;
-        public byte Channel;
-        public byte MidiValue;
-        public Color Color;
-        public int ScorePoint;
-    }
-
-    [Serializable]
-    public struct MusicConfiguration
-    {
-        /// <summary>
-        /// Absolute path for midi file
-        /// </summary>
-        public string MidiFilePath;
-
-        /// <summary>
-        /// Audio clip
-        /// </summary>
-        public AudioClip AudioClip;
-
-        /// <summary>
-        /// How long of midi delay from music in seconds
-        /// </summary>
-        public float TimeOffet;
-    }
-
-    public class NotesCollectionAdapter : NoteSequence
-    {
-        public NotesCollectionAdapter(IEnumerable<Melanchall.DryWetMidi.Interaction.Note> notesCollection, TempoMap tempoMap)
-        {
-            foreach(var note in notesCollection)
-            {
-                var metricTimeOfNote = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, tempoMap);
-                long timeInMicroseconds = metricTimeOfNote.TotalMicroseconds;
-                float timeInSeconds = timeInMicroseconds / 1000000F;
-                var noteData = new NoteData(timeInSeconds);
-                Enqueue(noteData);
-            }
+            Debug.Log("Play End!");
         }
     }
 }

@@ -35,9 +35,12 @@ namespace PopNathakorn.UI
         [SerializeField]
         private Color color;
         [SerializeField]
-        private KeyCode inputKeyCode;
+        private KeyCode inputKey;
+        [SerializeField]
+        private float precisionCriteria;
         #endregion
 
+        public NoteEvent OnHit = new NoteEvent();
         public UnityEvent OnCompleted = new UnityEvent();
 
         public Color Color
@@ -53,22 +56,22 @@ namespace PopNathakorn.UI
         {
             set
             {
-                inputKeyCode = value;
-                keyButtonText.text = inputKeyCode.ToString();
-                name = $"NoteLane:{inputKeyCode}";
+                inputKey = value;
+                keyButtonText.text = inputKey.ToString();
+                name = $"NoteLane:{inputKey}";
             }
         }
 
         public NoteGenerator NoteGenerator { set { noteGenerator = value; } }
         public NoteSequence NoteSequence { set { noteSequence = NoteSequence.OrderByTime(value); } }
+        public float PrecisionCriteria { set { precisionCriteria = value; } }
 
         float time => Time.time;
 
         float startTime;
         NoteSequence noteSequence;
         IEnumerator launchingRoutine;
-        float timeToReachEndPosition;
-        bool isLatestNoteReachEndPosition;
+        bool isLatestNoteDestroyed;
 
         private void Awake()
         {
@@ -78,7 +81,7 @@ namespace PopNathakorn.UI
         private void UpdateVisual()
         {
             keyButton.targetGraphic.color = color;
-            keyButtonText.text = inputKeyCode.ToString();
+            keyButtonText.text = inputKey.ToString();
         }
 
         public void Launch(NoteSequence noteSequence)
@@ -93,7 +96,6 @@ namespace PopNathakorn.UI
                 return;
 
             startTime = time;
-            timeToReachEndPosition = CalculateTimeToReachEndPosition(noteSequence.TimeToReachHitPosition);
 
             launchingRoutine = Launching();
             StartCoroutine(launchingRoutine);
@@ -101,7 +103,7 @@ namespace PopNathakorn.UI
 
         IEnumerator Launching()
         {
-            isLatestNoteReachEndPosition = false;
+            isLatestNoteDestroyed = false;
 
             while(noteSequence.Count > 0)
             {
@@ -110,63 +112,19 @@ namespace PopNathakorn.UI
                 yield return new WaitUntil(() => time - startTime >= nextTimeToLaunch);
 
                 var note = noteGenerator.Create(noteLaneArea);
-                note.Launch(color, startPosition.position, endPosition.position, timeToReachEndPosition);
+                note.Launch(color, startPosition.position, endPosition.position, hitPosition.position, noteSequence.TimeToReachHitPosition, precisionCriteria, inputKey);
+                note.OnHit.AddListener((n) => { OnHit?.Invoke(n); });
 
                 // if this is the latest note, then watch for destroy
                 if(noteSequence.Count == 0)
-                    note.OnDestroyed.AddListener((destroyedNote) => isLatestNoteReachEndPosition = true);
+                    note.OnDestroyed.AddListener((destroyedNote) => isLatestNoteDestroyed = true);
             }
 
-            yield return new WaitUntil(() => isLatestNoteReachEndPosition);
+            yield return new WaitUntil(() => isLatestNoteDestroyed);
 
             launchingRoutine = null;
             OnCompleted?.Invoke();
             OnCompleted?.RemoveAllListeners();
-        }
-
-        public float CalculateTimeToReachEndPosition(float timeToReachHitPosition)
-        {
-            var hitDistance = Vector3.Distance(startPosition.position, hitPosition.position);
-            var endDistance = Vector3.Distance(startPosition.position, endPosition.position);
-            float hitDistanceRatio = Mathf.InverseLerp(0, endDistance, hitDistance);
-
-            return timeToReachHitPosition / hitDistanceRatio;
-        }
-    }
-
-    public class NoteSequence : Queue<NoteData>
-    {
-        public float TimeToReachHitPosition;
-
-        public NoteSequence() { }
-
-        public NoteSequence(float timeToReachHitPosition)
-        {
-            TimeToReachHitPosition = timeToReachHitPosition;
-        }
-
-        public static NoteSequence OrderByTime(NoteSequence noteSequence)
-        {
-            var newSequence = new NoteSequence(noteSequence.TimeToReachHitPosition);
-
-            var sortedQueue = noteSequence.OrderBy(noteData => noteData.Time);
-            foreach(var noteData in sortedQueue)
-                newSequence.Enqueue(noteData);
-
-            return newSequence;
-        }
-    }
-
-    public struct NoteData
-    {
-        /// <summary>
-        /// Time in seconds
-        /// </summary>
-        public float Time;
-
-        public NoteData(float time)
-        {
-            Time = time;
         }
     }
 }

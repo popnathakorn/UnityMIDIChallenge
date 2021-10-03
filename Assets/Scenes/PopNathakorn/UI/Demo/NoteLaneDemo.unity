@@ -705,6 +705,10 @@ PrefabInstance:
       value: 0.42352945
       objectReference: {fileID: 0}
     - target: {fileID: 7275262219181689621, guid: 31075eb3b6a2ec845979aedb4dcdf964, type: 3}
+      propertyPath: inputKey
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275262219181689621, guid: 31075eb3b6a2ec845979aedb4dcdf964, type: 3}
       propertyPath: inputKeyCode
       value: 115
       objectReference: {fileID: 0}
@@ -931,6 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteLane1: {fileID: 1753698837}
   noteLane2: {fileID: 889443642}
+  precisionCriteria: 0.2
 --- !u!4 &2037881223
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,6 +1044,10 @@ PrefabInstance:
     - target: {fileID: 7275262219181689619, guid: 31075eb3b6a2ec845979aedb4dcdf964, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275262219181689621, guid: 31075eb3b6a2ec845979aedb4dcdf964, type: 3}
+      propertyPath: inputKey
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 7275262219181689621, guid: 31075eb3b6a2ec845979aedb4dcdf964, type: 3}
       propertyPath: noteGenerator
